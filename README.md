@@ -20,6 +20,7 @@ rocm-smi --setperflevel high
 ./torch_docker.sh
 git clone --depth 1 https://github.com/CompVis/stable-diffusion.git
 cd stable-diffusion/
+pip install -r ../requirements.txt
 mkdir -pv models/ldm/stable-diffusion-v1/
 wget https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
 ln -vs $(pwd)/sd-v1-4.ckpt models/ldm/stable-diffusion-v1/model.ckpt

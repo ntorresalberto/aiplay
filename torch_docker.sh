@@ -14,6 +14,7 @@ docker run -it \
        --cap-add=SYS_PTRACE \
        --security-opt seccomp=unconfined \
        -v $(pwd):$(pwd) \
+       -v root_cache:/root/.cache \
        --env HSA_OVERRIDE_GFX_VERSION=10.3.0 \
        --workdir $(pwd) \
        rocm/pytorch:latest
