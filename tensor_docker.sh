@@ -9,12 +9,12 @@ docker run -it \
        --device=/dev/kfd \
        --device=/dev/dri \
        --ipc=host \
-       --shm-size 16G \
        --group-add video \
        --group-add render \
        --cap-add=SYS_PTRACE \
        --security-opt seccomp=unconfined \
        -v $(pwd):$(pwd) \
+       -v root_cache:/root/.cache \
        --env HSA_OVERRIDE_GFX_VERSION=10.3.0 \
        --workdir $(pwd) \
        rocm/tensorflow:latest

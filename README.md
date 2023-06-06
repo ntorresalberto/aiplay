@@ -16,15 +16,20 @@ rocm-smi --setperflevel high
 ./tensortest.py # simple print devices and train example
 ```
 
+NOTE: `--H 256 --W 256 --n_samples=1` are necessary to avoid OOM VRAM problems
+NOTE 2: modified to use vram-optimized version
+NOTE 3: `requirements.txt` was manually constructed from stable-diffusion/environment.yaml
+
 ```bash
 ./torch_docker.sh
-git clone --depth 1 https://github.com/CompVis/stable-diffusion.git
+git clone https://github.com/basujindal/stable-diffusion.git
 cd stable-diffusion/
+pip install --upgrade pip
 pip install -r ../requirements.txt
 mkdir -pv models/ldm/stable-diffusion-v1/
 wget https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
 ln -vs $(pwd)/sd-v1-4.ckpt models/ldm/stable-diffusion-v1/model.ckpt
-python3 scripts/txt2img.py --prompt "a photograph of an astronaut riding a horse" --plms
+python3 optimizedSD/optimized_txt2img.py --prompt "A photograph of an astronaut riding a horse" --H 512 --W 512 --seed 1 --n_iter 2 --n_samples 1 --ddim_steps 50
 ```
 
 
